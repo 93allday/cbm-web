@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="description" content="Calculate CBM with ease using our SIMPLE CBM CALCULATOR">
+	<meta name="keywords" content="SIMPLE CBM, EASY CBM, SAVE TIME, QUICKLY, TRADE, EXPORT, IMPORT">
+	<meta name="author" content="EXPORT Beginner">
+	<meta charset="UTF-8">
+	<title>SIMPLE CBM CALCULATOR for Traders</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 20px;
+		}
+
+		input[type=text],
+		select {
+			padding: 8px 8px;
+			margin: 20px 0;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			font-size: 20px;
+			margin-left: 10px;
+			width: 200px;
+		}
+
+		input[type=button] {
+			background-color: #c4ea70;
+			color: black;
+			font-weight: bold;
+			padding: 10px 15px;
+			margin: 15px 0;
+			margin-left: 30px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 20px;
+		}
+
+		input[type=button]:hover {
+			background-color: #45a049;
+		}
+
+		.container {
+			border-radius: 5px;
+			border: 3px solid #ffb190;
+			border-radius: 10px;
+			background-color: #fffafa;
+			padding: 20px;
+			margin: 50px auto;
+			max-width: 550px;
+			min-width: 350px;
+		}
+
+		.result {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			border-radius: 10px;
+			background-color: #ede8d5;
+			padding: 20px;
+		}
+
+		.carton {
+			margin-top: -10px;
+			margin-left: 13px;
+		}
+
+		select {
+			margin-left: 10px;
+			width: 70px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>SIMPLE CBM CALCULATOR</h1>
+		<hr>
+		<h2 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR is a convenient website where you can calculate CBM.
+		</h2>
+		<hr>
+		<form>
+			<label for="length">Length (m)</label>
+			<input type="text" id="length" name="length" placeholder="Enter only numbers.">
+			<div>
+				<label for="width">Width (m)</label>
+				<input type="text" id="width" name="width" placeholder="Enter only numbers." style="margin-left: 20px;">
+			</div>
+			<div>
+				<label for="height">Heght (m)</label>
+				<input type="text" id="height" name="height" placeholder="Enter only numbers." style="margin-left: 18px;">
+			</div>
+			<hr>
+			<label for="quantity">Quantity (EA)</label>
+			<input type="text" id="quantity" name="quantity" placeholder="Enter only numbers.">
+			<div>
+				<label for="weight">Gross Weight</label>
+				<input type="text" id="weight" name="weight" placeholder="Enter only numbers.">
+				<select id="weight_unit">
+					<option value="g">g</option>
+					<option value="kg">kg</option>
+					<option value="oz">oz</option>
+					<option value="lb">lb</option>
+				</select>
+				<br>
+				<p class="carton">(/Carton)</p>
+			</div>
+			<hr>
+			<input type="button" value="Calculate" onclick="calculateCBM()">
+		</form>
+		<div class="result">
+			<p><strong>CBM :</strong> <span id="cbm_result"></span></p>
+			<p><strong>Total Qty :</strong> <span id="total_quantity"></span></p>
+			<p><strong>Total G.W :</strong> <span id="total_weight"></span></p>
+		</div>
+		<br>
+		<hr>
+		<h3 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR helps people in the trade industry, such as exports or imports, to check CBM easily.
+			<br><br>What is CBM? <a href="https://www.ups.com/hk/en/supplychain/insights/knowledge/glossary-term/cubic-meter.page" target="_blank">by UPS</a>
+		</h3>
+		<hr>
+		<br>
+		<label for="length_converter">Length converter</label>
+		<br>
+		<input type="text" id="length_converter" name="length_converter" placeholder="Enter only numbers.">
+		<select id="length_unit_converter">
+			<option value="cm">cm</option>
+			<option value="m">m</option>
+			<option value="in">in</option>
+		</select>
+		<input type="button" value="Convert" onclick="convertLength()">
+		<div id="converted_length"></div>
+		<br>
+
+		<div>
+			<label for="weight_converter">Weight converter</label>
+			<br>
+			<input type="text" id="weight_converter" name="weight_converter" placeholder="Enter only numbers.">
+			<select id="weight_unit_converter">
+				<option value="g">g</option>
+				<option value="kg">kg</option>
+				<option value="oz">oz</option>
+				<option value="lb">lb</option>
+			</select>
+			<input type="button" value="Convert" onclick="convertWeight()">
+			<div id="converted_weight"></div>
+		</div>
+	</div>
+
+	<script>
+		function convertLength() {
+			// get input values
+			var length = parseFloat(document.getElementById("length_converter").value);
+			var unit = document.getElementById("length_unit_converter").value;
+
+			// validate input
+			if (isNaN(length)) {
+				document.getElementById("converted_length").innerHTML = "";
+				return;
+			}
+
+			// convert length to cm or inch
+			var length_cm;
+			if (unit === "cm") {
+				length_cm = length;
+			} else if (unit === "m") {
+				length_cm = length * 100;
+			} else if (unit === "in") {
+				length_cm = length * 2.54;
+			}
+
+			// display result
+			var length_m = length_cm / 100;
+			var length_inch = length_cm / 2.54;
+
+			document.getElementById("converted_length").innerHTML = "Result : <span style='color: blue'>" +
+				length_cm.toFixed(2) + " cm / " +
+				length_m.toFixed(2) + " m / " +
+				length_inch.toFixed(2) + " inch" + "<br><br>" + "</span>";
+		}
+
+		function convertWeight() {
+			// get input values
+			var weight = parseFloat(document.getElementById("weight_converter").value);
+			var unit = document.getElementById("weight_unit_converter").value;
+
+			// validate input
+			if (isNaN(weight)) {
+				document.getElementById("converted_weight").innerHTML = "";
+				return;
+			}
+
+			// convert weight to gram
+			var weight_g;
+			switch (unit) {
+				case "g":
+					weight_g = weight;
+					break;
+				case "kg":
+					weight_g = weight * 1000;
+					break;
+				case "oz":
+					weight_g = weight * 28.3495231;
+					break;
+				case "lb":
+					weight_g = weight * 453.59237;
+					break;
+				default:
+					weight_g = weight;
+					break;
+			}
+
+			// display result
+			var weight_kg = weight_g / 1000;
+			var weight_oz = weight_g / 28.3495231;
+			var weight_lb = weight_g / 453.59237;
+
+			document.getElementById("converted_weight").innerHTML = "Result : <span style='color: blue'>" +
+				weight_g.toFixed(2) + " g / " +
+				weight_kg.toFixed(2) + " kg / " +
+				weight_oz.toFixed(2) + " oz / " +
+				weight_lb.toFixed(2) + " lb" + "</span>";
+		}
+
+		function calculateCBM() {
+			// get input values
+			var length = parseFloat(document.getElementById("length").value);
+			var width = parseFloat(document.getElementById("width").value);
+			var height = parseFloat(document.getElementById("height").value);
+			var quantity = parseInt(document.getElementById("quantity").value);
+			var weight = parseFloat(document.getElementById("weight").value);
+			var unit = document.getElementById("weight_unit").value;
+
+			// validate input
+			if (isNaN(width) || isNaN(height) || isNaN(length) || isNaN(quantity) || isNaN(weight)) {
+				document.getElementById("cbm_result").innerHTML = "<span style='color:blue;'>Fill in the blanks.</span>";
+				return;
+			}
+
+			// convert unit to gram
+			switch (unit) {
+				case "g":
+					weight *= 1;
+					break;
+				case "kg":
+					weight *= 1;
+					break;
+				case "oz":
+					weight *= 1;
+					break;
+				case "lb":
+					weight *= 1;
+					break;
+				default:
+					weight *= 1;
+					break;
+			}
+
+			// calculate CBM and weight
+			var cbm = width * height * length * quantity;
+			var total_weight = quantity * weight;
+
+			// display results
+			var cbm_result;
+			if (cbm % 1 === 0) {
+				cbm_result = cbm.toFixed(0);
+			} else if (!Number.isFinite(cbm)) {
+				cbm_result = cbm.toFixed(6);
+			} else {
+				let decimalPlaces = cbm.toString().split('.')[1].length;
+				cbm_result = decimalPlaces > 6 ? cbm.toFixed(6) : cbm.toFixed(decimalPlaces);
+			}
+			cbm_result += " (m<sup>3</sup>)";
+			var total_quantity = quantity.toFixed(0) + " EA";
+
+			// determine the weight unit to be displayed
+			var weight_unit_display;
+			switch (unit) {
+				case "g":
+					weight_unit_display = "g";
+					break;
+				case "kg":
+					weight_unit_display = "kg";
+					break;
+				case "oz":
+					weight_unit_display = "oz";
+					break;
+				case "lb":
+					weight_unit_display = "lb";
+					break;
+				default:
+					weight_unit_display = "kg";
+					break;
+			}
+
+			// display the total weight with the correct unit
+			var total_weight_display = total_weight.toFixed(2) + " " + weight_unit_display;
+
+			document.getElementById("cbm_result").innerHTML = cbm_result;
+			document.getElementById("total_quantity").innerHTML = total_quantity;
+			document.getElementById("total_weight").innerHTML = total_weight_display;
+		}
+	</script>
+</body>
+
+</html>
