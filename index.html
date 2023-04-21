@@ -71,6 +71,16 @@
 			margin-left: 10px;
 			width: 70px;
 		}
+
+		#tipstap {
+			display: none;
+			margin-top: -10px;
+		}
+
+		#tipstapsec {
+			display: none;
+			margin-top: -10px;
+		}
 	</style>
 </head>
 
@@ -78,7 +88,8 @@
 	<div class="container">
 		<h1>SIMPLE CBM CALCULATOR</h1>
 		<hr>
-		<h2 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR is a convenient website where you can calculate CBM.
+		<h2 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR is a convenient website where you can
+			calculate CBM.
 		</h2>
 		<hr>
 		<form>
@@ -90,7 +101,8 @@
 			</div>
 			<div>
 				<label for="height">Heght (m)</label>
-				<input type="text" id="height" name="height" placeholder="Enter only numbers." style="margin-left: 18px;">
+				<input type="text" id="height" name="height" placeholder="Enter only numbers."
+					style="margin-left: 18px;">
 			</div>
 			<hr>
 			<label for="quantity">Quantity (EA)</label>
@@ -117,8 +129,11 @@
 		</div>
 		<br>
 		<hr>
-		<h3 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR helps people in the trade industry, such as exports or imports, to check CBM easily.
-			<br><br>What is CBM? <a href="https://www.ups.com/hk/en/supplychain/insights/knowledge/glossary-term/cubic-meter.page" target="_blank">by UPS</a>
+		<h3 style="font-size: 20px; font-weight: normal;">SIMPLE CBM CALCULATOR helps people in the trade industry, such
+			as exports or imports, to check CBM easily.
+			<br><br>What is CBM? <a
+				href="https://www.ups.com/hk/en/supplychain/insights/knowledge/glossary-term/cubic-meter.page"
+				target="_blank">by UPS</a>
 		</h3>
 		<hr>
 		<br>
@@ -147,162 +162,229 @@
 			<input type="button" value="Convert" onclick="convertWeight()">
 			<div id="converted_weight"></div>
 		</div>
-	</div>
 
-	<script>
-		function convertLength() {
-			// get input values
-			var length = parseFloat(document.getElementById("length_converter").value);
-			var unit = document.getElementById("length_unit_converter").value;
+		<h4 style="display: inline-block; font-size: 22px; margin-bottom: 10px;">Importance of Accurate CBM Calculation</h4>
+		<br><button style="display: inline-block; margin-top: 0px;" onclick="toggletipstap()">open</button>
+		<div id="tipstap">
+			<p>Accurately calculating the cubic meter (CBM) of a shipment is a crucial aspect of international trade,
+				particularly when it comes to the calculation of freight charges, customs duties, and taxes. CBM is used
+				to determine the amount of space a shipment occupies on a vessel or aircraft, and it is calculated by
+				multiplying the length, width, and height of the cargo in meters.
+				<br><br>An incorrect CBM calculation can result in costly errors. If the CBM is underestimated, the
+				cargo
+				may not fit into the available space on a vessel or aircraft, leading to delays, rerouting, or even
+				cancellation of the shipment. On the other hand, overestimating the CBM can result in unnecessarily high
+				freight charges and customs duties, leading to increased costs for both the importer and the exporter.
+				<br><br>Moreover, some countries may impose penalties or fines for incorrect CBM declarations, and
+				incorrect
+				CBM calculations can also lead to disputes and legal issues between trading partners.
+				<br><br>Therefore, it is essential to ensure accurate CBM calculations for each shipment. This can be
+				achieved by using precise measurements and ensuring that all dimensions are included in the calculation.
+				Additionally, it is important to use the correct unit of measurement, which is typically meters in
+				international trade.
+				<br><br>In summary, accurate CBM calculation is a critical aspect of international trade that can impact
+				both the cost and the efficiency of the supply chain. By taking care to ensure precise measurements and
+				using the correct unit of measurement, traders can avoid costly errors and maintain smooth and efficient
+				trade operations.
+			</p>
+		</div>
+		<div>
+			<h5 style="display: inline-block; font-size: 22px; margin-bottom: 10px;">Why CBM Measurement Should Use Meters</h5>
+			<br><button style="display: inline-block; margin-top: 0px;" onclick="toggletipstapsec()">open</button>
+			<div id="tipstapsec">
+				<p>Using meters as the unit of measurement for CBM is preferred over other units because it is an
+					international standard and is widely recognized by all parties involved in international trade. It
+					is also a metric unit of measurement, which is the standard system of measurement used in most
+					countries around the world.
+					<br><br>Using a standardized unit of measurement like meters for CBM ensures that there is no
+					confusion or misunderstandings between trading partners. It also helps to streamline the shipping
+					process, as freight forwarders, customs officials, and other parties involved in the shipment can
+					easily understand and interpret the CBM measurements.
+					<br><br>Furthermore, using meters as the unit of measurement for CBM is consistent with other
+					international standards for trade, such as the International System of Units (SI), which is used for
+					measurements in science, industry, and trade worldwide.
+					<br><br>In summary, using meters as the unit of measurement for CBM is preferred in international
+					trade because it is an internationally recognized standard and helps to avoid confusion and
+					misunderstandings between trading partners. It is also consistent with other international standards
+					for trade, making it an efficient and reliable method of measuring the volume of cargo being
+					shipped.
+				</p>
+			</div>
+		</div>
 
-			// validate input
-			if (isNaN(length)) {
-				document.getElementById("converted_length").innerHTML = "";
-				return;
+		<script>
+			function convertLength() {
+				// get input values
+				var length = parseFloat(document.getElementById("length_converter").value);
+				var unit = document.getElementById("length_unit_converter").value;
+
+				// validate input
+				if (isNaN(length)) {
+					document.getElementById("converted_length").innerHTML = "";
+					return;
+				}
+
+				// convert length to cm or inch
+				var length_cm;
+				if (unit === "cm") {
+					length_cm = length;
+				} else if (unit === "m") {
+					length_cm = length * 100;
+				} else if (unit === "in") {
+					length_cm = length * 2.54;
+				}
+
+				// display result
+				var length_m = length_cm / 100;
+				var length_inch = length_cm / 2.54;
+
+				document.getElementById("converted_length").innerHTML = "Result : <span style='color: blue'>" +
+					length_cm.toFixed(2) + " cm / " +
+					length_m.toFixed(2) + " m / " +
+					length_inch.toFixed(2) + " inch" + "<br><br>" + "</span>";
 			}
 
-			// convert length to cm or inch
-			var length_cm;
-			if (unit === "cm") {
-				length_cm = length;
-			} else if (unit === "m") {
-				length_cm = length * 100;
-			} else if (unit === "in") {
-				length_cm = length * 2.54;
+			function convertWeight() {
+				// get input values
+				var weight = parseFloat(document.getElementById("weight_converter").value);
+				var unit = document.getElementById("weight_unit_converter").value;
+
+				// validate input
+				if (isNaN(weight)) {
+					document.getElementById("converted_weight").innerHTML = "";
+					return;
+				}
+
+				// convert weight to gram
+				var weight_g;
+				switch (unit) {
+					case "g":
+						weight_g = weight;
+						break;
+					case "kg":
+						weight_g = weight * 1000;
+						break;
+					case "oz":
+						weight_g = weight * 28.3495231;
+						break;
+					case "lb":
+						weight_g = weight * 453.59237;
+						break;
+					default:
+						weight_g = weight;
+						break;
+				}
+
+				// display result
+				var weight_kg = weight_g / 1000;
+				var weight_oz = weight_g / 28.3495231;
+				var weight_lb = weight_g / 453.59237;
+
+				document.getElementById("converted_weight").innerHTML = "Result : <span style='color: blue'>" +
+					weight_g.toFixed(2) + " g / " +
+					weight_kg.toFixed(2) + " kg / " +
+					weight_oz.toFixed(2) + " oz / " +
+					weight_lb.toFixed(2) + " lb" + "</span>";
 			}
 
-			// display result
-			var length_m = length_cm / 100;
-			var length_inch = length_cm / 2.54;
+			function calculateCBM() {
+				// get input values
+				var length = parseFloat(document.getElementById("length").value);
+				var width = parseFloat(document.getElementById("width").value);
+				var height = parseFloat(document.getElementById("height").value);
+				var quantity = parseInt(document.getElementById("quantity").value);
+				var weight = parseFloat(document.getElementById("weight").value);
+				var unit = document.getElementById("weight_unit").value;
 
-			document.getElementById("converted_length").innerHTML = "Result : <span style='color: blue'>" +
-				length_cm.toFixed(2) + " cm / " +
-				length_m.toFixed(2) + " m / " +
-				length_inch.toFixed(2) + " inch" + "<br><br>" + "</span>";
-		}
+				// validate input
+				if (isNaN(width) || isNaN(height) || isNaN(length) || isNaN(quantity) || isNaN(weight)) {
+					document.getElementById("cbm_result").innerHTML = "<span style='color:blue;'>Fill in the blanks.</span>";
+					return;
+				}
 
-		function convertWeight() {
-			// get input values
-			var weight = parseFloat(document.getElementById("weight_converter").value);
-			var unit = document.getElementById("weight_unit_converter").value;
+				// convert unit to gram
+				switch (unit) {
+					case "g":
+						weight *= 1;
+						break;
+					case "kg":
+						weight *= 1;
+						break;
+					case "oz":
+						weight *= 1;
+						break;
+					case "lb":
+						weight *= 1;
+						break;
+					default:
+						weight *= 1;
+						break;
+				}
 
-			// validate input
-			if (isNaN(weight)) {
-				document.getElementById("converted_weight").innerHTML = "";
-				return;
+				// calculate CBM and weight
+				var cbm = width * height * length * quantity;
+				var total_weight = quantity * weight;
+
+				// display results
+				var cbm_result;
+				if (cbm % 1 === 0) {
+					cbm_result = cbm.toFixed(0);
+				} else if (!Number.isFinite(cbm)) {
+					cbm_result = cbm.toFixed(6);
+				} else {
+					let decimalPlaces = cbm.toString().split('.')[1].length;
+					cbm_result = decimalPlaces > 6 ? cbm.toFixed(6) : cbm.toFixed(decimalPlaces);
+				}
+				cbm_result += " (m<sup>3</sup>)";
+				var total_quantity = quantity.toFixed(0) + " EA";
+
+				// determine the weight unit to be displayed
+				var weight_unit_display;
+				switch (unit) {
+					case "g":
+						weight_unit_display = "g";
+						break;
+					case "kg":
+						weight_unit_display = "kg";
+						break;
+					case "oz":
+						weight_unit_display = "oz";
+						break;
+					case "lb":
+						weight_unit_display = "lb";
+						break;
+					default:
+						weight_unit_display = "kg";
+						break;
+				}
+
+				// display the total weight with the correct unit
+				var total_weight_display = total_weight.toFixed(2) + " " + weight_unit_display;
+
+				document.getElementById("cbm_result").innerHTML = cbm_result;
+				document.getElementById("total_quantity").innerHTML = total_quantity;
+				document.getElementById("total_weight").innerHTML = total_weight_display;
 			}
 
-			// convert weight to gram
-			var weight_g;
-			switch (unit) {
-				case "g":
-					weight_g = weight;
-					break;
-				case "kg":
-					weight_g = weight * 1000;
-					break;
-				case "oz":
-					weight_g = weight * 28.3495231;
-					break;
-				case "lb":
-					weight_g = weight * 453.59237;
-					break;
-				default:
-					weight_g = weight;
-					break;
+			function toggletipstap() {
+				var riceInfo = document.getElementById("tipstap");
+				if (riceInfo.style.display === "none") {
+					riceInfo.style.display = "block";
+				} else {
+					riceInfo.style.display = "none";
+				}
 			}
 
-			// display result
-			var weight_kg = weight_g / 1000;
-			var weight_oz = weight_g / 28.3495231;
-			var weight_lb = weight_g / 453.59237;
-
-			document.getElementById("converted_weight").innerHTML = "Result : <span style='color: blue'>" +
-				weight_g.toFixed(2) + " g / " +
-				weight_kg.toFixed(2) + " kg / " +
-				weight_oz.toFixed(2) + " oz / " +
-				weight_lb.toFixed(2) + " lb" + "</span>";
-		}
-
-		function calculateCBM() {
-			// get input values
-			var length = parseFloat(document.getElementById("length").value);
-			var width = parseFloat(document.getElementById("width").value);
-			var height = parseFloat(document.getElementById("height").value);
-			var quantity = parseInt(document.getElementById("quantity").value);
-			var weight = parseFloat(document.getElementById("weight").value);
-			var unit = document.getElementById("weight_unit").value;
-
-			// validate input
-			if (isNaN(width) || isNaN(height) || isNaN(length) || isNaN(quantity) || isNaN(weight)) {
-				document.getElementById("cbm_result").innerHTML = "<span style='color:blue;'>Fill in the blanks.</span>";
-				return;
+			function toggletipstapsec() {
+				var riceInfo = document.getElementById("tipstapsec");
+				if (riceInfo.style.display === "none") {
+					riceInfo.style.display = "block";
+				} else {
+					riceInfo.style.display = "none";
+				}
 			}
 
-			// convert unit to gram
-			switch (unit) {
-				case "g":
-					weight *= 1;
-					break;
-				case "kg":
-					weight *= 1;
-					break;
-				case "oz":
-					weight *= 1;
-					break;
-				case "lb":
-					weight *= 1;
-					break;
-				default:
-					weight *= 1;
-					break;
-			}
-
-			// calculate CBM and weight
-			var cbm = width * height * length * quantity;
-			var total_weight = quantity * weight;
-
-			// display results
-			var cbm_result;
-			if (cbm % 1 === 0) {
-				cbm_result = cbm.toFixed(0);
-			} else if (!Number.isFinite(cbm)) {
-				cbm_result = cbm.toFixed(6);
-			} else {
-				let decimalPlaces = cbm.toString().split('.')[1].length;
-				cbm_result = decimalPlaces > 6 ? cbm.toFixed(6) : cbm.toFixed(decimalPlaces);
-			}
-			cbm_result += " (m<sup>3</sup>)";
-			var total_quantity = quantity.toFixed(0) + " EA";
-
-			// determine the weight unit to be displayed
-			var weight_unit_display;
-			switch (unit) {
-				case "g":
-					weight_unit_display = "g";
-					break;
-				case "kg":
-					weight_unit_display = "kg";
-					break;
-				case "oz":
-					weight_unit_display = "oz";
-					break;
-				case "lb":
-					weight_unit_display = "lb";
-					break;
-				default:
-					weight_unit_display = "kg";
-					break;
-			}
-
-			// display the total weight with the correct unit
-			var total_weight_display = total_weight.toFixed(2) + " " + weight_unit_display;
-
-			document.getElementById("cbm_result").innerHTML = cbm_result;
-			document.getElementById("total_quantity").innerHTML = total_quantity;
-			document.getElementById("total_weight").innerHTML = total_weight_display;
-		}
-	</script>
+		</script>
 </body>
 
 </html>
